@@ -78,11 +78,20 @@ export interface Config {
   withRef: boolean;
 }
 
+export interface SortableContainerVariedWidthProps extends SortableContainerProps {
+  beforeStart?: (index: number) => void;
+  shouldCancelOver?: (prevIndex: number, newIndex: number) => boolean;
+  leftCon?: (index: number) => number;
+  rightCon?: (index: number) => number;
+}
+
 export type WrappedComponentFactory<P> = (props: P) => JSX.Element;
 
 export type WrappedComponent<P> = React.ComponentClass<P> | WrappedComponentFactory<P>;
 
 export function SortableContainer<P>(wrappedComponent: WrappedComponent<P>, config?: Config): React.ComponentClass<P & SortableContainerProps>;
+
+export function SortableContainerVariedWidth<P>(wrappedComponent: WrappedComponent<P>, config?: Config): React.ComponentClass<P & SortableContainerVariedWidthProps>;
 
 export function SortableElement<P>(wrappedComponent: WrappedComponent<P>, config?: Config): React.ComponentClass<P & SortableElementProps>;
 
